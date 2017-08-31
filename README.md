@@ -2,8 +2,8 @@
 
 ## Table of Contents
 * [Introduction](#Introduction)
-* [Languages Used](#Languages Used)
-* [How to Play](#How to Play)
+* [Languages-Used](#Languages Used)
+* [How-to-Play](#How to Play)
 * [Instructions](#instructions)
 * [Contributing](#contributing)
 
