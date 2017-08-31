@@ -10,9 +10,9 @@ var cardDeck=['fa-diamond','fa-diamond','fa-paper-plane-o','fa-paper-plane-o','f
  *   - add each card's HTML to the page
  */
  var deck=document.getElementsByClassName('deck')[0];
-var movesCounter=0;
-var starCount=3;
-var initTime;
+var movesCounter=0;//Variable that keeps track of moves
+var starCount=3;//Variable that keeps track of star rating
+var initTime;//initial start time of game is stored in it.
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -40,11 +40,15 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+//Function that initialise the basic operations of the game
 function setupGame(){
+    //resetting and updating various parameters
     movesCounter=0;
     moveManager();
+    //Deck is shuffled
     var shuffledDeck=shuffle(cardDeck);
     deck.innerHTML="";
+    //Cards are added to the deck
     for(var i=0, len=shuffledDeck.length; i<len; i++){
         deck.innerHTML+="<li class=\"card\" onclick=\"clickTrigger(this)\">\n<i class=\"fa\"></i>\n</li>";
         card=document.getElementsByClassName('fa');
@@ -52,27 +56,36 @@ function setupGame(){
     }
 };
 
+//Function that takes care of click on any tile
 function clickTrigger(tile){
+    //opening the Tile
     tile.classList.add("open");
     tile.classList.add("show");
+    //Checking for a match
     checkMatch();
+    //Checking for the game completion
     checkWin();
 };
 
+//Function that checks for match of cards
 function checkMatch(){
     var openCards=document.getElementsByClassName('open show');
+    //Starting the timer if this is the first card opened
     if(movesCounter==0 && openCards.length==1){
         initTime= new Date().getTime();
     }
+    //2 cards are required to check for a match, so the length is checked
     if(openCards.length>1){
         updateMove();
         if(openCards[0].children[0].className==openCards[1].children[0].className){
+            //If cards match, they are marked as match
             for(var i=openCards.length-1; i>=0; i--){
                 openCards[i].classList.add("match");
                 openCards[i].classList.remove("open","show");
             }
         }
         else{
+            //if cards don't match, 500 millisecond delay is provided for the user to see the card and then they are close
             setTimeout(function() {
                 for(var i=openCards.length-1; i>=0; i--){
                 openCards[i].classList.remove("open","show");
@@ -82,9 +95,11 @@ function checkMatch(){
     }
 };
 
+//Function that checks for a win
 function checkWin(){
     var allCards=document.getElementsByClassName("card");
     var matchedCards=document.getElementsByClassName("match");
+    //if all cards are matched, its a win
     if(allCards.length==matchedCards.length){
         var endTime=new Date().getTime();
         var Time=endTime-initTime;
@@ -93,18 +108,20 @@ function checkWin(){
         s=s%60;
         var h=Math.floor(m/60);
         m=m%60;
+        //parameters are calculated and assigned
         document.getElementById("stars").innerHTML=String(starCount);
         document.getElementById("moves").innerHTML=String(movesCounter);
         document.getElementById("time").innerHTML=String(h+":"+m+":"+s);
         $("#victory").modal("show");
     }
 }
-
+//The function that updates moves and star rating
 function updateMove(){
     movesCounter++;
     moveManager();
 };
 
+//function that updates star rating
 function moveManager(){
     var moves=document.getElementsByClassName("moves")[0];
     moves.innerHTML=String(movesCounter);
@@ -123,6 +140,7 @@ function moveManager(){
     updateStars();
 };
 
+//function that does the require change in html for star rating
 function updateStars(){
     var stars=document.getElementsByClassName("fa-star");
     if(stars.length!=starCount){
@@ -136,5 +154,5 @@ function updateStars(){
         }
     }
 };
-
+//initialising Game for first run
 setupGame();
