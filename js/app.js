@@ -49,6 +49,27 @@ function setupGame(){
 }
 
 function clickTrigger(tile){
-    alert(tile.className);
+    tile.classList.add("open");
+    tile.classList.add("show");
+    checkMatch();
+}
+
+function checkMatch(){
+    var openCards=document.getElementsByClassName('open show');
+    if(openCards.length>1){
+        if(openCards[0].children[0].className==openCards[1].children[0].className){
+            for(var i=openCards.length-1; i>=0; i--){
+                openCards[i].classList.add("match");
+                openCards[i].classList.remove("open","show");
+            }
+        }
+        else{
+            setTimeout(function() {
+                for(var i=openCards.length-1; i>=0; i--){
+                openCards[i].classList.remove("open","show");
+                }
+            }, 500);
+        }
+    }
 }
 setupGame();
