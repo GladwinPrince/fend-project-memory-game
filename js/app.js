@@ -88,6 +88,7 @@ function checkWin(){
     var allCards=document.getElementsByClassName("card");
     var matchedCards=document.getElementsByClassName("match");
     if(allCards.length==matchedCards.length){
+        $("#victory").modal('show');
         var endTime=new Date().getTime();
         var Time=endTime-initTime;
         var s=Math.floor(Time/1000);
@@ -101,7 +102,7 @@ function checkWin(){
         document.getElementsByClassName("deck")[0].style.display="none";
         document.getElementById("scorepage").style.display="block";
     }
-}
+};
 
 function updateMove(){
     movesCounter++;
