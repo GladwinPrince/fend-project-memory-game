@@ -10,7 +10,8 @@ var cardDeck=['fa-diamond','fa-diamond','fa-paper-plane-o','fa-paper-plane-o','f
  *   - add each card's HTML to the page
  */
  var deck=document.getElementsByClassName('deck')[0];
-
+var movesCounter=0;
+var starCount=3;
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -24,7 +25,7 @@ function shuffle(array) {
     }
 
     return array;
-}
+};
 
 
 /*
@@ -39,6 +40,8 @@ function shuffle(array) {
  */
 
 function setupGame(){
+    movesCounter=0;
+    moveManager();
     var shuffledDeck=shuffle(cardDeck);
     deck.innerHTML="";
     for(var i=0, len=shuffledDeck.length; i<len; i++){
@@ -46,17 +49,18 @@ function setupGame(){
         card=document.getElementsByClassName('fa');
         card[card.length-1].classList.add(shuffledDeck[i]);
     }
-}
+};
 
 function clickTrigger(tile){
     tile.classList.add("open");
     tile.classList.add("show");
     checkMatch();
-}
+};
 
 function checkMatch(){
     var openCards=document.getElementsByClassName('open show');
     if(openCards.length>1){
+        updateMove();
         if(openCards[0].children[0].className==openCards[1].children[0].className){
             for(var i=openCards.length-1; i>=0; i--){
                 openCards[i].classList.add("match");
@@ -71,5 +75,43 @@ function checkMatch(){
             }, 500);
         }
     }
-}
+};
+
+function updateMove(){
+    movesCounter++;
+    moveManager();
+};
+
+function moveManager(){
+    var moves=document.getElementsByClassName("moves")[0];
+    moves.innerHTML=String(movesCounter);
+    if(movesCounter<12){
+        starCount=3;
+    }
+    else if(movesCounter<18){
+        starCount=2;
+    }
+    else if(movesCounter<24){
+        starCount=1;
+    }
+    else{
+        starCount=0;
+    }
+    updateStars();
+};
+
+function updateStars(){
+    var stars=document.getElementsByClassName("fa-star");
+    if(stars.length!=starCount){
+        var starPanel=document.getElementsByClassName("stars")[0];
+        starPanel.innerHTML="";
+        for(var i=0; i<starCount; i++){
+            starPanel.innerHTML+="<li><i class=\"fa fa-star\"></i></li>"
+        }
+        for(var i=starCount; i<3; i++){
+            starPanel.innerHTML+="<li><i class=\"fa fa-star-o\"></i></li>"
+        }
+    }
+};
+
 setupGame();
