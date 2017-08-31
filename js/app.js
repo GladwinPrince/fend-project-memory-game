@@ -12,6 +12,7 @@ var cardDeck=['fa-diamond','fa-diamond','fa-paper-plane-o','fa-paper-plane-o','f
  var deck=document.getElementsByClassName('deck')[0];
 var movesCounter=0;
 var starCount=3;
+var initTime;
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -40,6 +41,8 @@ function shuffle(array) {
  */
 
 function setupGame(){
+    document.getElementsByClassName("deck")[0].style.display="";
+    document.getElementById("scorepage").style.display="none";
     movesCounter=0;
     moveManager();
     var shuffledDeck=shuffle(cardDeck);
@@ -55,10 +58,14 @@ function clickTrigger(tile){
     tile.classList.add("open");
     tile.classList.add("show");
     checkMatch();
+    checkWin();
 };
 
 function checkMatch(){
     var openCards=document.getElementsByClassName('open show');
+    if(movesCounter==0 && openCards.length==1){
+        initTime= new Date().getTime();
+    }
     if(openCards.length>1){
         updateMove();
         if(openCards[0].children[0].className==openCards[1].children[0].className){
@@ -76,6 +83,26 @@ function checkMatch(){
         }
     }
 };
+
+function checkWin(){
+    var allCards=document.getElementsByClassName("card");
+    var matchedCards=document.getElementsByClassName("match");
+    if(allCards.length==matchedCards.length){
+        var endTime=new Date().getTime();
+        var Time=endTime-initTime;
+        var s=Math.floor(Time/1000);
+        var m=Math.floor(s/60);
+        s=s%60;
+        var h=Math.floor(m/60);
+        m=m%60;
+        document.getElementById("stars").innerHTML=String(starCount);
+        document.getElementById("moves").innerHTML=String(movesCounter);
+        document.getElementById("time").innerHTML=String(h+":"+m+":"+s);
+        document.getElementsByClassName("deck")[0].style.display="none";
+        document.getElementById("scorepage").style.display="block";
+        alert('You Win!!');
+    }
+}
 
 function updateMove(){
     movesCounter++;
