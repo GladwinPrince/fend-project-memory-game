@@ -2,8 +2,8 @@
 
 ## Table of Contents
 * [Introduction](#Introduction)
-* [Languages-Used](#Languages Used)
-* [How-to-Play](#How to Play)
+* [Languages-Used](#Languages-Used)
+* [How-to-Play](#How-to-Play)
 * [Instructions](#instructions)
 * [Contributing](#contributing)
 
@@ -11,11 +11,11 @@
 
 The Memory game is a game that tests your memory power. Memory game consists of 16 tiles, which consists of 8 different types of tiles. Each tile has a matching tile in the deck. The positions of the tiles are shuffle before the game starts, but once the game starts the positions are fixed. The player has to use his memory power to remember each tile and match it with its pair within the least number of moves possible.
 
-## Languages Used
+## Languages-Used
 
 The Memory game is built using the HTML, CSS and JavaScript Language.
 
-## How to Play
+## How-to-Play
 
 1. Download a copy of this project from GitHub, either using the GitHub Zip file download or Clone the repository into your computer.
 2. Open the index.html file in the Project using a Web Browser that supports JavaScript.
