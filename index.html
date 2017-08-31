@@ -4,8 +4,11 @@
     <meta charset="utf-8">
     <title>Matching Game</title>
     <meta name="description" content="">
-    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -78,14 +81,26 @@
                 <i class="fa fa-cube"></i>
             </li>
         </ul>
-        <div id="scorepage">
-            <h2>Congratulations!!</h3>
-            <h3>You Won</h3>
+    </div>
+
+    <div class="modal fade" id="victory" tabindex="-1" role="dialog" aria-labelledby="victoryLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="victoryLabel">Congratulations!!</h4>
+          </div>
+          <div class="modal-body">
+            <h4>You Won</h4>
             <b>Star Rating: </b><span id="stars"></span><br />
             <b>No. of Moves: </b><span id="moves"></span><br />
             <b>Time Duration: </b><span id="time"></span><br />
-            <span onclick="setupGame()" class="play">Play Again</span>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="" onclick='setupGame()' data-dismiss="modal">Play Again</button>
+          </div>
         </div>
+      </div>
     </div>
 
     <script src="js/app.js"></script>

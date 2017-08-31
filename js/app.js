@@ -41,8 +41,6 @@ function shuffle(array) {
  */
 
 function setupGame(){
-    document.getElementsByClassName("deck")[0].style.display="";
-    document.getElementById("scorepage").style.display="none";
     movesCounter=0;
     moveManager();
     var shuffledDeck=shuffle(cardDeck);
@@ -98,8 +96,7 @@ function checkWin(){
         document.getElementById("stars").innerHTML=String(starCount);
         document.getElementById("moves").innerHTML=String(movesCounter);
         document.getElementById("time").innerHTML=String(h+":"+m+":"+s);
-        document.getElementsByClassName("deck")[0].style.display="none";
-        document.getElementById("scorepage").style.display="block";
+        $("#victory").modal("show");
     }
 }
 
