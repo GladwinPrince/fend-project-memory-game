@@ -100,7 +100,6 @@ function checkWin(){
         document.getElementById("time").innerHTML=String(h+":"+m+":"+s);
         document.getElementsByClassName("deck")[0].style.display="none";
         document.getElementById("scorepage").style.display="block";
-        alert('You Win!!');
     }
 }
 

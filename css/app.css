@@ -121,3 +121,8 @@ h1 {
     display: none;
     text-align: center;
 }
+
+.play{
+    color: green;
+    cursor: pointer;
+}
