@@ -123,7 +123,14 @@ function checkWin(){
         var h=Math.floor(m/60);
         m=m%60;
         //parameters are calculated and assigned
-        document.getElementById("stars").innerHTML=String(starCount);
+        var starResult=document.getElementById("stars");
+        starResult.innerHTML="";
+        for(var i=0; i<starCount; i++){
+            starResult.innerHTML+="<li><i class=\"fa fa-star\"></i></li>"
+        }
+        for(var i=starCount; i<3; i++){
+            starResult.innerHTML+="<li><i class=\"fa fa-star-o\"></i></li>"
+        }
         document.getElementById("moves").innerHTML=String(movesCounter);
         document.getElementById("time").innerHTML=String(h+":"+m+":"+s);
         $("#victory").modal("show");

@@ -135,3 +135,14 @@ h1 {
 .invisible{
     display: none;
 }
+
+# stars{
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+#stars li {
+    list-style: none;
+    display: inline-block;
+}
