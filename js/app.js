@@ -158,11 +158,8 @@ function moveManager(){
     else if(movesCounter<18){
         starCount=2;
     }
-    else if(movesCounter<24){
+    else {
         starCount=1;
-    }
-    else{
-        starCount=0;
     }
     updateStars();
 };
