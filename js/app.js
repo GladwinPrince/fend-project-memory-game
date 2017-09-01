@@ -67,6 +67,11 @@ function clickTrigger(tile){
     checkWin();
 };
 
+function toggleOverlay(){
+    document.getElementById("overlay").classList.toggle("invisible");
+    document.getElementById("overlay").classList.toggle("visible");
+}
+
 //Function that checks for match of cards
 function checkMatch(){
     var openCards=document.getElementsByClassName('open show');
@@ -75,7 +80,8 @@ function checkMatch(){
         initTime= new Date().getTime();
     }
     //2 cards are required to check for a match, so the length is checked
-    if(openCards.length>1){
+    if(openCards.length==2){
+        toggleOverlay();
         updateMove();
         if(openCards[0].children[0].className==openCards[1].children[0].className){
             //If cards match, they are marked as match
@@ -83,6 +89,7 @@ function checkMatch(){
                 openCards[i].classList.add("match");
                 openCards[i].classList.remove("open","show");
             }
+            toggleOverlay();
         }
         else{
             //if cards don't match, 500 millisecond delay is provided for the user to see the card and then they are close
@@ -90,6 +97,7 @@ function checkMatch(){
                 for(var i=openCards.length-1; i>=0; i--){
                 openCards[i].classList.remove("open","show");
                 }
+                toggleOverlay();
             }, 500);
         }
     }
