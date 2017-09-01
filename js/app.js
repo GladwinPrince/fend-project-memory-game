@@ -51,10 +51,10 @@ function setupGame(){
     //Deck is shuffled
     var shuffledDeck=shuffle(cardDeck);
     deck.innerHTML="";
+    card=document.getElementsByClassName('fa');
     //Cards are added to the deck
     for(var i=0, len=shuffledDeck.length; i<len; i++){
         deck.innerHTML+="<li class=\"card\" onclick=\"clickTrigger(this)\">\n<i class=\"fa\"></i>\n</li>";
-        card=document.getElementsByClassName('fa');
         card[card.length-1].classList.add(shuffledDeck[i]);
     }
 };
@@ -62,8 +62,7 @@ function setupGame(){
 //Function that takes care of click on any tile
 function clickTrigger(tile){
     //opening the Tile
-    tile.classList.add("open");
-    tile.classList.add("show");
+    tile.classList.add("open","show");
     //Checking for a match
     checkMatch();
     //Checking for the game completion
