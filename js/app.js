@@ -49,6 +49,7 @@ function setupGame(){
     moveManager();
     time=0;
     //Deck is shuffled
+    document.getElementById("timer").innerHTML="0:0:0";
     var shuffledDeck=shuffle(cardDeck);
     deck.innerHTML="";
     card=document.getElementsByClassName('fa');
