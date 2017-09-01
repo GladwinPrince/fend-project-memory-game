@@ -107,6 +107,8 @@ function checkMatch(){
 
 function TimeManager(){
     time++;
+    document.getElementById("timer").innerHTML=calcTime();
+
 }
 
 //Function that checks for a win
@@ -116,11 +118,6 @@ function checkWin(){
     //if all cards are matched, its a win
     if(allCards.length==matchedCards.length){
         clearInterval(Timer);
-        var s=time;
-        var m=Math.floor(s/60);
-        s=s%60;
-        var h=Math.floor(m/60);
-        m=m%60;
         //parameters are calculated and assigned
         var starResult=document.getElementById("stars");
         starResult.innerHTML="";
@@ -131,9 +128,18 @@ function checkWin(){
             starResult.innerHTML+="<li><i class=\"fa fa-star-o\"></i></li>"
         }
         document.getElementById("moves").innerHTML=String(movesCounter);
-        document.getElementById("time").innerHTML=String(h+":"+m+":"+s);
+        document.getElementById("time").innerHTML=calcTime();
         $("#victory").modal("show");
     }
+}
+
+function calcTime(){
+    var s=time;
+    var m=Math.floor(s/60);
+    s=s%60;
+    var h=Math.floor(m/60);
+    m=m%60;
+    return (h+":"+m+":"+s);
 }
 //The function that updates moves and star rating
 function updateMove(){
