@@ -13,6 +13,8 @@ var cardDeck=['fa-diamond','fa-diamond','fa-paper-plane-o','fa-paper-plane-o','f
 var movesCounter=0;//Variable that keeps track of moves
 var starCount=3;//Variable that keeps track of star rating
 var initTime;//initial start time of game is stored in it.
+var time=0;
+var Timer;
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -45,6 +47,7 @@ function setupGame(){
     //resetting and updating various parameters
     movesCounter=0;
     moveManager();
+    time=0;
     //Deck is shuffled
     var shuffledDeck=shuffle(cardDeck);
     deck.innerHTML="";
@@ -77,7 +80,7 @@ function checkMatch(){
     var openCards=document.getElementsByClassName('open show');
     //Starting the timer if this is the first card opened
     if(movesCounter==0 && openCards.length==1){
-        initTime= new Date().getTime();
+        Timer=setInterval(TimeManager, 1000);
     }
     //2 cards are required to check for a match, so the length is checked
     if(openCards.length==2){
@@ -103,15 +106,18 @@ function checkMatch(){
     }
 };
 
+function TimeManager(){
+    time++;
+}
+
 //Function that checks for a win
 function checkWin(){
     var allCards=document.getElementsByClassName("card");
     var matchedCards=document.getElementsByClassName("match");
     //if all cards are matched, its a win
     if(allCards.length==matchedCards.length){
-        var endTime=new Date().getTime();
-        var Time=endTime-initTime;
-        var s=Math.floor(Time/1000);
+        clearInterval(Timer);
+        var s=time;
         var m=Math.floor(s/60);
         s=s%60;
         var h=Math.floor(m/60);
